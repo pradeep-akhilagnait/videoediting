@@ -49,6 +49,7 @@ WORKBOOKS = [
     ("Sikkim_Villages_Pincodes.xlsx", [("11", "Sikkim", "Subdivision")]),
     ("Ladakh_Villages_Pincodes.xlsx", [("37", "Ladakh", "Tehsil")]),
     ("Puducherry_Villages_Pincodes.xlsx", [("34", "Puducherry", "Taluk")]),
+    ("Chandigarh_Villages_Pincodes.xlsx", [("4", "Chandigarh", "Tehsil")]),
 ]
 
 
@@ -99,6 +100,21 @@ def subdistrict_sheet(code, sub, vdf):
     return df
 
 
+def urban_pin_sheet(code):
+    """PIN codes of urban local bodies, for states/UTs with no villages in LGD."""
+    u = load("pincode_urban")
+    u = u[u["State Code"] == code]
+    df = pd.DataFrame({
+        "State": u["State Name"],
+        "Urban Local Body": u["Localbody Name"],
+        "Local Body Type": u["Localbody Type Name"],
+        "Pincode": u["Pincode"],
+        "Local Body LGD Code": u["Localbody Code"],
+    }).drop_duplicates().sort_values(["Urban Local Body", "Pincode"]).reset_index(drop=True)
+    df.insert(0, "S.No.", range(1, len(df) + 1))
+    return df
+
+
 def to_numbers(df):
     for c in df.columns:
         if c.endswith("Code") or c == "Pincode":
@@ -126,6 +142,18 @@ for fname, states in WORKBOOKS:
     for code, prefix, sub in states:
         vdf = village_sheet(code, sub)
         sdf = subdistrict_sheet(code, sub, vdf)
+        if vdf.empty:
+            udf = urban_pin_sheet(code)
+            sheets[f"{prefix} PIN Codes"] = to_numbers(udf)
+            sheets[f"{prefix} {sub}s"] = to_numbers(sdf)
+            summary.append({
+                "State": udf["State"].iloc[0],
+                "Districts": int((districts["State Code"] == code).sum()),
+                f"{sub}s": len(sdf),
+                "Villages": 0,
+                "Distinct Pincodes": int(udf["Pincode"].nunique()),
+            })
+            continue
         sheets[f"{prefix} Villages"] = to_numbers(vdf)
         sheets[f"{prefix} {sub}s"] = to_numbers(sdf)
         summary.append({

@@ -1,6 +1,6 @@
 # Village directory with PIN codes
 
-State → District → Mandal (AP, Telangana) / Tehsil (Odisha, Rajasthan, Madhya Pradesh, Uttar Pradesh, Punjab, Haryana, Chhattisgarh, Himachal Pradesh, Uttarakhand, Jammu & Kashmir, Delhi, Ladakh) / Taluk (Tamil Nadu, Karnataka, Kerala, Puducherry) / Taluka (Maharashtra, Gujarat, Goa) / Block (Bihar, West Bengal, Jharkhand, Meghalaya, Mizoram) / Revenue Circle (Assam) / Circle (Arunachal Pradesh, Nagaland) / Subdivision (Tripura, Manipur, Sikkim) → Village, with PIN codes and official LGD codes.
+State → District → Mandal (AP, Telangana) / Tehsil (Odisha, Rajasthan, Madhya Pradesh, Uttar Pradesh, Punjab, Haryana, Chhattisgarh, Himachal Pradesh, Uttarakhand, Jammu & Kashmir, Delhi, Ladakh, Chandigarh) / Taluk (Tamil Nadu, Karnataka, Kerala, Puducherry) / Taluka (Maharashtra, Gujarat, Goa) / Block (Bihar, West Bengal, Jharkhand, Meghalaya, Mizoram) / Revenue Circle (Assam) / Circle (Arunachal Pradesh, Nagaland) / Subdivision (Tripura, Manipur, Sikkim) → Village, with PIN codes and official LGD codes.
 
 | File | Sheets |
 |---|---|
@@ -35,6 +35,7 @@ State → District → Mandal (AP, Telangana) / Tehsil (Odisha, Rajasthan, Madhy
 | `Sikkim_Villages_Pincodes.xlsx` | Summary, Sikkim Villages, Sikkim Subdivisions |
 | `Ladakh_Villages_Pincodes.xlsx` | Summary, Ladakh Villages, Ladakh Tehsils |
 | `Puducherry_Villages_Pincodes.xlsx` | Summary, Puducherry Villages, Puducherry Taluks |
+| `Chandigarh_Villages_Pincodes.xlsx` | Summary, Chandigarh PIN Codes, Chandigarh Tehsils (no villages in LGD; urban PIN list instead) |
 
 | State | Districts | Mandals/Tehsils | Villages | Villages with PIN |
 |---|---|---|---|---|
@@ -70,11 +71,12 @@ State → District → Mandal (AP, Telangana) / Tehsil (Odisha, Rajasthan, Madhy
 | Sikkim | 6 | 19 | 485 | 485 |
 | Ladakh | 2 | 15 | 248 | 248 |
 | Puducherry | 2 | 8 | 129 | 123 |
+| Chandigarh | 1 | 1 | 0 | – (20 urban PINs) |
 
 **Source:** Local Government Directory (lgdirectory.gov.in), Govt. of India, data as on 02 Oct 2026,
 taken from the daily LGD archive at https://github.com/ramSeraph/opendata (release `lgd-latest`).
 A blank PIN means LGD has no PIN code for that village yet.
 
-To refresh: download and extract `villages`, `subdistricts`, `districts` and `pincode_villages`
+To refresh: download and extract `villages`, `subdistricts`, `districts`, `pincode_villages` and `pincode_urban`
 `.csv.7z` files from that release, then run
 `python scripts/build_villages_excel.py <extracted dir> <date, e.g. 02Oct2026> [workbook.xlsx ...]`.
