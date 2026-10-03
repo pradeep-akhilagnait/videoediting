@@ -1,6 +1,6 @@
 # Village directory with PIN codes
 
-State → District → Mandal (AP, Telangana) / Tehsil (Odisha, Rajasthan) / Taluk (Tamil Nadu, Karnataka, Kerala) / Taluka (Maharashtra, Gujarat) → Village, with PIN codes and official LGD codes.
+State → District → Mandal (AP, Telangana) / Tehsil (Odisha, Rajasthan, Madhya Pradesh) / Taluk (Tamil Nadu, Karnataka, Kerala) / Taluka (Maharashtra, Gujarat) → Village, with PIN codes and official LGD codes.
 
 | File | Sheets |
 |---|---|
@@ -12,6 +12,7 @@ State → District → Mandal (AP, Telangana) / Tehsil (Odisha, Rajasthan) / Tal
 | `Maharashtra_Villages_Pincodes.xlsx` | Summary, Maharashtra Villages, Maharashtra Talukas |
 | `Gujarat_Villages_Pincodes.xlsx` | Summary, Gujarat Villages, Gujarat Talukas |
 | `Rajasthan_Villages_Pincodes.xlsx` | Summary, Rajasthan Villages, Rajasthan Tehsils |
+| `MadhyaPradesh_Villages_Pincodes.xlsx` | Summary, Madhya Pradesh Villages, Madhya Pradesh Tehsils |
 
 | State | Districts | Mandals/Tehsils | Villages | Villages with PIN |
 |---|---|---|---|---|
@@ -24,6 +25,7 @@ State → District → Mandal (AP, Telangana) / Tehsil (Odisha, Rajasthan) / Tal
 | Maharashtra | 36 | 358 | 44,929 | 44,805 |
 | Gujarat | 34 | 306 | 19,199 | 19,057 |
 | Rajasthan | 41 | 425 | 52,593 | 51,448 |
+| Madhya Pradesh | 55 | 445 | 57,497 | 57,478 |
 
 **Source:** Local Government Directory (lgdirectory.gov.in), Govt. of India, data as on 02 Oct 2026,
 taken from the daily LGD archive at https://github.com/ramSeraph/opendata (release `lgd-latest`).
