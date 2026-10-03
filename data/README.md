@@ -1,6 +1,6 @@
 # Village directory with PIN codes
 
-State → District → Mandal (AP, Telangana) / Tehsil (Odisha, Rajasthan, Madhya Pradesh, Uttar Pradesh, Punjab, Haryana, Chhattisgarh, Himachal Pradesh, Uttarakhand, Jammu & Kashmir) / Taluk (Tamil Nadu, Karnataka, Kerala) / Taluka (Maharashtra, Gujarat, Goa) / Block (Bihar, West Bengal, Jharkhand) / Revenue Circle (Assam) → Village, with PIN codes and official LGD codes.
+State → District → Mandal (AP, Telangana) / Tehsil (Odisha, Rajasthan, Madhya Pradesh, Uttar Pradesh, Punjab, Haryana, Chhattisgarh, Himachal Pradesh, Uttarakhand, Jammu & Kashmir, Delhi) / Taluk (Tamil Nadu, Karnataka, Kerala) / Taluka (Maharashtra, Gujarat, Goa) / Block (Bihar, West Bengal, Jharkhand) / Revenue Circle (Assam) → Village, with PIN codes and official LGD codes.
 
 | File | Sheets |
 |---|---|
@@ -25,6 +25,7 @@ State → District → Mandal (AP, Telangana) / Tehsil (Odisha, Rajasthan, Madhy
 | `Uttarakhand_Villages_Pincodes.xlsx` | Summary, Uttarakhand Villages, Uttarakhand Tehsils |
 | `JammuKashmir_Villages_Pincodes.xlsx` | Summary, J&K Villages, J&K Tehsils |
 | `Goa_Villages_Pincodes.xlsx` | Summary, Goa Villages, Goa Talukas |
+| `Delhi_Villages_Pincodes.xlsx` | Summary, Delhi Villages, Delhi Tehsils |
 
 | State | Districts | Mandals/Tehsils | Villages | Villages with PIN |
 |---|---|---|---|---|
@@ -50,6 +51,7 @@ State → District → Mandal (AP, Telangana) / Tehsil (Odisha, Rajasthan, Madhy
 | Uttarakhand | 13 | 129 | 17,343 | 17,342 |
 | Jammu & Kashmir | 20 | 208 | 6,857 | 6,857 |
 | Goa | 3 | 12 | 429 | 429 |
+| Delhi | 13 | 39 | 353 | 208 |
 
 **Source:** Local Government Directory (lgdirectory.gov.in), Govt. of India, data as on 02 Oct 2026,
 taken from the daily LGD archive at https://github.com/ramSeraph/opendata (release `lgd-latest`).
