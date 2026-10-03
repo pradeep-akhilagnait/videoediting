@@ -41,6 +41,7 @@ WORKBOOKS = [
     ("Goa_Villages_Pincodes.xlsx", [("30", "Goa", "Taluka")]),
     ("Delhi_Villages_Pincodes.xlsx", [("7", "Delhi", "Tehsil")]),
     ("Tripura_Villages_Pincodes.xlsx", [("16", "Tripura", "Subdivision")]),
+    ("Manipur_Villages_Pincodes.xlsx", [("14", "Manipur", "Subdivision")]),
 ]
 
 

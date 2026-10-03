@@ -1,6 +1,6 @@
 # Village directory with PIN codes
 
-State → District → Mandal (AP, Telangana) / Tehsil (Odisha, Rajasthan, Madhya Pradesh, Uttar Pradesh, Punjab, Haryana, Chhattisgarh, Himachal Pradesh, Uttarakhand, Jammu & Kashmir, Delhi) / Taluk (Tamil Nadu, Karnataka, Kerala) / Taluka (Maharashtra, Gujarat, Goa) / Block (Bihar, West Bengal, Jharkhand) / Revenue Circle (Assam) / Subdivision (Tripura) → Village, with PIN codes and official LGD codes.
+State → District → Mandal (AP, Telangana) / Tehsil (Odisha, Rajasthan, Madhya Pradesh, Uttar Pradesh, Punjab, Haryana, Chhattisgarh, Himachal Pradesh, Uttarakhand, Jammu & Kashmir, Delhi) / Taluk (Tamil Nadu, Karnataka, Kerala) / Taluka (Maharashtra, Gujarat, Goa) / Block (Bihar, West Bengal, Jharkhand) / Revenue Circle (Assam) / Subdivision (Tripura, Manipur) → Village, with PIN codes and official LGD codes.
 
 | File | Sheets |
 |---|---|
@@ -27,6 +27,7 @@ State → District → Mandal (AP, Telangana) / Tehsil (Odisha, Rajasthan, Madhy
 | `Goa_Villages_Pincodes.xlsx` | Summary, Goa Villages, Goa Talukas |
 | `Delhi_Villages_Pincodes.xlsx` | Summary, Delhi Villages, Delhi Tehsils |
 | `Tripura_Villages_Pincodes.xlsx` | Summary, Tripura Villages, Tripura Subdivisions |
+| `Manipur_Villages_Pincodes.xlsx` | Summary, Manipur Villages, Manipur Subdivisions |
 
 | State | Districts | Mandals/Tehsils | Villages | Villages with PIN |
 |---|---|---|---|---|
@@ -54,6 +55,7 @@ State → District → Mandal (AP, Telangana) / Tehsil (Odisha, Rajasthan, Madhy
 | Goa | 3 | 12 | 429 | 429 |
 | Delhi | 13 | 39 | 353 | 208 |
 | Tripura | 8 | 23 | 898 | 898 |
+| Manipur | 16 | 65 | 3,850 | 3,850 |
 
 **Source:** Local Government Directory (lgdirectory.gov.in), Govt. of India, data as on 02 Oct 2026,
 taken from the daily LGD archive at https://github.com/ramSeraph/opendata (release `lgd-latest`).
