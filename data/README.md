@@ -1,6 +1,6 @@
 # Village directory with PIN codes
 
-State → District → Mandal (AP, Telangana) / Tehsil (Odisha, Rajasthan, Madhya Pradesh, Uttar Pradesh, Punjab, Haryana, Chhattisgarh, Himachal Pradesh, Uttarakhand, Jammu & Kashmir, Delhi, Ladakh, Chandigarh, Andaman & Nicobar, Lakshadweep) / Taluk (Tamil Nadu, Karnataka, Kerala, Puducherry) / Taluka (Maharashtra, Gujarat, Goa) / Block (Bihar, West Bengal, Jharkhand, Meghalaya, Mizoram) / Revenue Circle (Assam) / Circle (Arunachal Pradesh, Nagaland) / Subdivision (Tripura, Manipur, Sikkim) → Village, with PIN codes and official LGD codes.
+State → District → Mandal (AP, Telangana) / Tehsil (Odisha, Rajasthan, Madhya Pradesh, Uttar Pradesh, Punjab, Haryana, Chhattisgarh, Himachal Pradesh, Uttarakhand, Jammu & Kashmir, Delhi, Ladakh, Chandigarh, Andaman & Nicobar, Lakshadweep, Dadra & Nagar Haveli and Daman & Diu) / Taluk (Tamil Nadu, Karnataka, Kerala, Puducherry) / Taluka (Maharashtra, Gujarat, Goa) / Block (Bihar, West Bengal, Jharkhand, Meghalaya, Mizoram) / Revenue Circle (Assam) / Circle (Arunachal Pradesh, Nagaland) / Subdivision (Tripura, Manipur, Sikkim) → Village, with PIN codes and official LGD codes.
 
 | File | Sheets |
 |---|---|
@@ -37,6 +37,7 @@ State → District → Mandal (AP, Telangana) / Tehsil (Odisha, Rajasthan, Madhy
 | `Puducherry_Villages_Pincodes.xlsx` | Summary, Puducherry Villages, Puducherry Taluks |
 | `AndamanNicobar_Villages_Pincodes.xlsx` | Summary, A&N Villages, A&N Tehsils |
 | `Lakshadweep_Villages_Pincodes.xlsx` | Summary, Lakshadweep Villages, Lakshadweep Tehsils |
+| `DNH_DamanDiu_Villages_Pincodes.xlsx` | Summary, DNH & DD Villages, DNH & DD Tehsils |
 | `Chandigarh_Villages_Pincodes.xlsx` | Summary, Chandigarh PIN Codes, Chandigarh Tehsils (no villages in LGD; urban PIN list instead) |
 
 | State | Districts | Mandals/Tehsils | Villages | Villages with PIN |
@@ -76,6 +77,7 @@ State → District → Mandal (AP, Telangana) / Tehsil (Odisha, Rajasthan, Madhy
 | Chandigarh | 1 | 1 | 0 | – (20 urban PINs) |
 | Andaman & Nicobar | 3 | 9 | 559 | 559 |
 | Lakshadweep | 1 | 10 | 27 | 27 |
+| Dadra & Nagar Haveli and Daman & Diu | 3 | 3 | 101 | 101 |
 
 **Source:** Local Government Directory (lgdirectory.gov.in), Govt. of India, data as on 02 Oct 2026,
 taken from the daily LGD archive at https://github.com/ramSeraph/opendata (release `lgd-latest`).

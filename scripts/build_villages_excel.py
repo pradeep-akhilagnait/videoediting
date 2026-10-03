@@ -52,6 +52,7 @@ WORKBOOKS = [
     ("Chandigarh_Villages_Pincodes.xlsx", [("4", "Chandigarh", "Tehsil")]),
     ("AndamanNicobar_Villages_Pincodes.xlsx", [("35", "A&N", "Tehsil")]),
     ("Lakshadweep_Villages_Pincodes.xlsx", [("31", "Lakshadweep", "Tehsil")]),
+    ("DNH_DamanDiu_Villages_Pincodes.xlsx", [("38", "DNH & DD", "Tehsil")]),
 ]
 
 
