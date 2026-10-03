@@ -1,6 +1,6 @@
 # Village directory with PIN codes
 
-State → District → Mandal (AP, Telangana) / Tehsil (Odisha, Rajasthan, Madhya Pradesh, Uttar Pradesh, Punjab, Haryana, Chhattisgarh, Himachal Pradesh, Uttarakhand, Jammu & Kashmir, Delhi, Ladakh) / Taluk (Tamil Nadu, Karnataka, Kerala) / Taluka (Maharashtra, Gujarat, Goa) / Block (Bihar, West Bengal, Jharkhand, Meghalaya, Mizoram) / Revenue Circle (Assam) / Circle (Arunachal Pradesh, Nagaland) / Subdivision (Tripura, Manipur, Sikkim) → Village, with PIN codes and official LGD codes.
+State → District → Mandal (AP, Telangana) / Tehsil (Odisha, Rajasthan, Madhya Pradesh, Uttar Pradesh, Punjab, Haryana, Chhattisgarh, Himachal Pradesh, Uttarakhand, Jammu & Kashmir, Delhi, Ladakh) / Taluk (Tamil Nadu, Karnataka, Kerala, Puducherry) / Taluka (Maharashtra, Gujarat, Goa) / Block (Bihar, West Bengal, Jharkhand, Meghalaya, Mizoram) / Revenue Circle (Assam) / Circle (Arunachal Pradesh, Nagaland) / Subdivision (Tripura, Manipur, Sikkim) → Village, with PIN codes and official LGD codes.
 
 | File | Sheets |
 |---|---|
@@ -34,6 +34,7 @@ State → District → Mandal (AP, Telangana) / Tehsil (Odisha, Rajasthan, Madhy
 | `Nagaland_Villages_Pincodes.xlsx` | Summary, Nagaland Villages, Nagaland Circles |
 | `Sikkim_Villages_Pincodes.xlsx` | Summary, Sikkim Villages, Sikkim Subdivisions |
 | `Ladakh_Villages_Pincodes.xlsx` | Summary, Ladakh Villages, Ladakh Tehsils |
+| `Puducherry_Villages_Pincodes.xlsx` | Summary, Puducherry Villages, Puducherry Taluks |
 
 | State | Districts | Mandals/Tehsils | Villages | Villages with PIN |
 |---|---|---|---|---|
@@ -68,6 +69,7 @@ State → District → Mandal (AP, Telangana) / Tehsil (Odisha, Rajasthan, Madhy
 | Nagaland | 17 | 120 | 1,570 | 1,570 |
 | Sikkim | 6 | 19 | 485 | 485 |
 | Ladakh | 2 | 15 | 248 | 248 |
+| Puducherry | 2 | 8 | 129 | 123 |
 
 **Source:** Local Government Directory (lgdirectory.gov.in), Govt. of India, data as on 02 Oct 2026,
 taken from the daily LGD archive at https://github.com/ramSeraph/opendata (release `lgd-latest`).

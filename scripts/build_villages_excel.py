@@ -48,6 +48,7 @@ WORKBOOKS = [
     ("Nagaland_Villages_Pincodes.xlsx", [("13", "Nagaland", "Circle")]),
     ("Sikkim_Villages_Pincodes.xlsx", [("11", "Sikkim", "Subdivision")]),
     ("Ladakh_Villages_Pincodes.xlsx", [("37", "Ladakh", "Tehsil")]),
+    ("Puducherry_Villages_Pincodes.xlsx", [("34", "Puducherry", "Taluk")]),
 ]
 
 
