@@ -1,6 +1,6 @@
 # Village directory with PIN codes
 
-State → District → Mandal (AP, Telangana) / Tehsil (Odisha) / Taluk (Tamil Nadu, Karnataka) → Village, with PIN codes and official LGD codes.
+State → District → Mandal (AP, Telangana) / Tehsil (Odisha) / Taluk (Tamil Nadu, Karnataka, Kerala) → Village, with PIN codes and official LGD codes.
 
 | File | Sheets |
 |---|---|
@@ -8,6 +8,7 @@ State → District → Mandal (AP, Telangana) / Tehsil (Odisha) / Taluk (Tamil N
 | `Odisha_Villages_Pincodes.xlsx` | Summary, Odisha Villages, Odisha Tehsils |
 | `TamilNadu_Villages_Pincodes.xlsx` | Summary, Tamil Nadu Villages, Tamil Nadu Taluks |
 | `Karnataka_Villages_Pincodes.xlsx` | Summary, Karnataka Villages, Karnataka Taluks |
+| `Kerala_Villages_Pincodes.xlsx` | Summary, Kerala Villages, Kerala Taluks |
 
 | State | Districts | Mandals/Tehsils | Villages | Villages with PIN |
 |---|---|---|---|---|
@@ -16,6 +17,7 @@ State → District → Mandal (AP, Telangana) / Tehsil (Odisha) / Taluk (Tamil N
 | Odisha | 30 | 317 | 51,800 | 50,217 |
 | Tamil Nadu | 38 | 317 | 18,681 | 18,652 |
 | Karnataka | 31 | 240 | 30,775 | 29,900 |
+| Kerala | 14 | 78 | 1,666 | 1,666 |
 
 **Source:** Local Government Directory (lgdirectory.gov.in), Govt. of India, data as on 02 Oct 2026,
 taken from the daily LGD archive at https://github.com/ramSeraph/opendata (release `lgd-latest`).
