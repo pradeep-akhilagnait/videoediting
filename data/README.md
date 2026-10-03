@@ -1,6 +1,6 @@
 # Village directory with PIN codes
 
-State → District → Mandal (AP, Telangana) / Tehsil (Odisha, Rajasthan, Madhya Pradesh, Uttar Pradesh, Punjab, Haryana, Chhattisgarh) / Taluk (Tamil Nadu, Karnataka, Kerala) / Taluka (Maharashtra, Gujarat) / Block (Bihar, West Bengal, Jharkhand) → Village, with PIN codes and official LGD codes.
+State → District → Mandal (AP, Telangana) / Tehsil (Odisha, Rajasthan, Madhya Pradesh, Uttar Pradesh, Punjab, Haryana, Chhattisgarh) / Taluk (Tamil Nadu, Karnataka, Kerala) / Taluka (Maharashtra, Gujarat) / Block (Bihar, West Bengal, Jharkhand) / Revenue Circle (Assam) → Village, with PIN codes and official LGD codes.
 
 | File | Sheets |
 |---|---|
@@ -20,6 +20,7 @@ State → District → Mandal (AP, Telangana) / Tehsil (Odisha, Rajasthan, Madhy
 | `Haryana_Villages_Pincodes.xlsx` | Summary, Haryana Villages, Haryana Tehsils |
 | `Jharkhand_Villages_Pincodes.xlsx` | Summary, Jharkhand Villages, Jharkhand Blocks |
 | `Chhattisgarh_Villages_Pincodes.xlsx` | Summary, Chhattisgarh Villages, Chhattisgarh Tehsils |
+| `Assam_Villages_Pincodes.xlsx` | Summary, Assam Villages, Assam Circles |
 
 | State | Districts | Mandals/Tehsils | Villages | Villages with PIN |
 |---|---|---|---|---|
@@ -40,6 +41,7 @@ State → District → Mandal (AP, Telangana) / Tehsil (Odisha, Rajasthan, Madhy
 | Haryana | 23 | 143 | 7,090 | 7,082 |
 | Jharkhand | 24 | 264 | 32,737 | 32,737 |
 | Chhattisgarh | 33 | 252 | 20,650 | 20,630 |
+| Assam | 35 | 161 | 29,373 | 28,723 |
 
 **Source:** Local Government Directory (lgdirectory.gov.in), Govt. of India, data as on 02 Oct 2026,
 taken from the daily LGD archive at https://github.com/ramSeraph/opendata (release `lgd-latest`).
