@@ -1,6 +1,6 @@
 # Village directory with PIN codes
 
-State → District → Mandal (AP, Telangana) / Tehsil (Odisha, Rajasthan, Madhya Pradesh, Uttar Pradesh) / Taluk (Tamil Nadu, Karnataka, Kerala) / Taluka (Maharashtra, Gujarat) / Block (Bihar) → Village, with PIN codes and official LGD codes.
+State → District → Mandal (AP, Telangana) / Tehsil (Odisha, Rajasthan, Madhya Pradesh, Uttar Pradesh) / Taluk (Tamil Nadu, Karnataka, Kerala) / Taluka (Maharashtra, Gujarat) / Block (Bihar, West Bengal) → Village, with PIN codes and official LGD codes.
 
 | File | Sheets |
 |---|---|
@@ -15,6 +15,7 @@ State → District → Mandal (AP, Telangana) / Tehsil (Odisha, Rajasthan, Madhy
 | `MadhyaPradesh_Villages_Pincodes.xlsx` | Summary, Madhya Pradesh Villages, Madhya Pradesh Tehsils |
 | `UttarPradesh_Villages_Pincodes.xlsx` | Summary, Uttar Pradesh Villages, Uttar Pradesh Tehsils |
 | `Bihar_Villages_Pincodes.xlsx` | Summary, Bihar Villages, Bihar Blocks |
+| `WestBengal_Villages_Pincodes.xlsx` | Summary, West Bengal Villages, West Bengal Blocks |
 
 | State | Districts | Mandals/Tehsils | Villages | Villages with PIN |
 |---|---|---|---|---|
@@ -30,6 +31,7 @@ State → District → Mandal (AP, Telangana) / Tehsil (Odisha, Rajasthan, Madhy
 | Madhya Pradesh | 55 | 445 | 57,497 | 57,478 |
 | Uttar Pradesh | 75 | 350 | 110,308 | 110,268 |
 | Bihar | 38 | 537 | 48,927 | 48,927 |
+| West Bengal | 23 | 346 | 41,005 | 41,005 |
 
 **Source:** Local Government Directory (lgdirectory.gov.in), Govt. of India, data as on 02 Oct 2026,
 taken from the daily LGD archive at https://github.com/ramSeraph/opendata (release `lgd-latest`).
