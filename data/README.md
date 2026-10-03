@@ -1,6 +1,6 @@
 # Village directory with PIN codes
 
-State → District → Mandal (AP, Telangana) / Tehsil (Odisha, Rajasthan, Madhya Pradesh, Uttar Pradesh, Punjab, Haryana, Chhattisgarh, Himachal Pradesh, Uttarakhand, Jammu & Kashmir, Delhi, Ladakh, Chandigarh) / Taluk (Tamil Nadu, Karnataka, Kerala, Puducherry) / Taluka (Maharashtra, Gujarat, Goa) / Block (Bihar, West Bengal, Jharkhand, Meghalaya, Mizoram) / Revenue Circle (Assam) / Circle (Arunachal Pradesh, Nagaland) / Subdivision (Tripura, Manipur, Sikkim) → Village, with PIN codes and official LGD codes.
+State → District → Mandal (AP, Telangana) / Tehsil (Odisha, Rajasthan, Madhya Pradesh, Uttar Pradesh, Punjab, Haryana, Chhattisgarh, Himachal Pradesh, Uttarakhand, Jammu & Kashmir, Delhi, Ladakh, Chandigarh, Andaman & Nicobar) / Taluk (Tamil Nadu, Karnataka, Kerala, Puducherry) / Taluka (Maharashtra, Gujarat, Goa) / Block (Bihar, West Bengal, Jharkhand, Meghalaya, Mizoram) / Revenue Circle (Assam) / Circle (Arunachal Pradesh, Nagaland) / Subdivision (Tripura, Manipur, Sikkim) → Village, with PIN codes and official LGD codes.
 
 | File | Sheets |
 |---|---|
@@ -35,6 +35,7 @@ State → District → Mandal (AP, Telangana) / Tehsil (Odisha, Rajasthan, Madhy
 | `Sikkim_Villages_Pincodes.xlsx` | Summary, Sikkim Villages, Sikkim Subdivisions |
 | `Ladakh_Villages_Pincodes.xlsx` | Summary, Ladakh Villages, Ladakh Tehsils |
 | `Puducherry_Villages_Pincodes.xlsx` | Summary, Puducherry Villages, Puducherry Taluks |
+| `AndamanNicobar_Villages_Pincodes.xlsx` | Summary, A&N Villages, A&N Tehsils |
 | `Chandigarh_Villages_Pincodes.xlsx` | Summary, Chandigarh PIN Codes, Chandigarh Tehsils (no villages in LGD; urban PIN list instead) |
 
 | State | Districts | Mandals/Tehsils | Villages | Villages with PIN |
@@ -72,6 +73,7 @@ State → District → Mandal (AP, Telangana) / Tehsil (Odisha, Rajasthan, Madhy
 | Ladakh | 2 | 15 | 248 | 248 |
 | Puducherry | 2 | 8 | 129 | 123 |
 | Chandigarh | 1 | 1 | 0 | – (20 urban PINs) |
+| Andaman & Nicobar | 3 | 9 | 559 | 559 |
 
 **Source:** Local Government Directory (lgdirectory.gov.in), Govt. of India, data as on 02 Oct 2026,
 taken from the daily LGD archive at https://github.com/ramSeraph/opendata (release `lgd-latest`).
