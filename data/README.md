@@ -1,6 +1,6 @@
 # Village directory with PIN codes
 
-State → District → Mandal (AP, Telangana) / Tehsil (Odisha, Rajasthan, Madhya Pradesh, Uttar Pradesh, Punjab, Haryana, Chhattisgarh, Himachal Pradesh, Uttarakhand, Jammu & Kashmir, Delhi) / Taluk (Tamil Nadu, Karnataka, Kerala) / Taluka (Maharashtra, Gujarat, Goa) / Block (Bihar, West Bengal, Jharkhand, Meghalaya, Mizoram) / Revenue Circle (Assam) / Subdivision (Tripura, Manipur) → Village, with PIN codes and official LGD codes.
+State → District → Mandal (AP, Telangana) / Tehsil (Odisha, Rajasthan, Madhya Pradesh, Uttar Pradesh, Punjab, Haryana, Chhattisgarh, Himachal Pradesh, Uttarakhand, Jammu & Kashmir, Delhi) / Taluk (Tamil Nadu, Karnataka, Kerala) / Taluka (Maharashtra, Gujarat, Goa) / Block (Bihar, West Bengal, Jharkhand, Meghalaya, Mizoram) / Revenue Circle (Assam) / Circle (Arunachal Pradesh) / Subdivision (Tripura, Manipur) → Village, with PIN codes and official LGD codes.
 
 | File | Sheets |
 |---|---|
@@ -30,6 +30,7 @@ State → District → Mandal (AP, Telangana) / Tehsil (Odisha, Rajasthan, Madhy
 | `Manipur_Villages_Pincodes.xlsx` | Summary, Manipur Villages, Manipur Subdivisions |
 | `Meghalaya_Villages_Pincodes.xlsx` | Summary, Meghalaya Villages, Meghalaya Blocks |
 | `Mizoram_Villages_Pincodes.xlsx` | Summary, Mizoram Villages, Mizoram Blocks |
+| `ArunachalPradesh_Villages_Pincodes.xlsx` | Summary, Arunachal Pradesh Villages, Arunachal Pradesh Circles |
 
 | State | Districts | Mandals/Tehsils | Villages | Villages with PIN |
 |---|---|---|---|---|
@@ -60,6 +61,7 @@ State → District → Mandal (AP, Telangana) / Tehsil (Odisha, Rajasthan, Madhy
 | Manipur | 16 | 65 | 3,850 | 3,850 |
 | Meghalaya | 12 | 56 | 7,200 | 7,107 |
 | Mizoram | 11 | 28 | 887 | 887 |
+| Arunachal Pradesh | 27 | 209 | 5,491 | 5,485 |
 
 **Source:** Local Government Directory (lgdirectory.gov.in), Govt. of India, data as on 02 Oct 2026,
 taken from the daily LGD archive at https://github.com/ramSeraph/opendata (release `lgd-latest`).
