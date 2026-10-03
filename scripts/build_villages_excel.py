@@ -3,7 +3,7 @@
 Source: Local Government Directory (lgdirectory.gov.in), via the daily LGD
 archive mirror at https://github.com/ramSeraph/opendata (release "lgd-latest").
 
-Usage: python scripts/build_villages_excel.py <dir with extracted LGD csvs> <date e.g. 02Oct2026>
+Usage: python scripts/build_villages_excel.py <dir with extracted LGD csvs> <date e.g. 02Oct2026> [workbook.xlsx ...]
 """
 import sys
 from pathlib import Path
@@ -12,13 +12,15 @@ import pandas as pd
 from openpyxl.styles import Font, PatternFill, Alignment
 from openpyxl.utils import get_column_letter
 
-SRC, DATE = Path(sys.argv[1]), sys.argv[2]
+SRC, DATE, ONLY = Path(sys.argv[1]), sys.argv[2], sys.argv[3:]
 OUT = Path(__file__).resolve().parent.parent / "data"
 
+# Only the workbooks named on the command line are rebuilt (all if none given).
 # (output file, [(state code, sheet prefix, sub-district label)])
 WORKBOOKS = [
     ("AP_Telangana_Villages_Pincodes.xlsx", [("28", "AP", "Mandal"), ("36", "Telangana", "Mandal")]),
     ("Odisha_Villages_Pincodes.xlsx", [("21", "Odisha", "Tehsil")]),
+    ("TamilNadu_Villages_Pincodes.xlsx", [("33", "Tamil Nadu", "Taluk")]),
 ]
 
 
@@ -90,6 +92,8 @@ def style(ws):
 
 
 for fname, states in WORKBOOKS:
+    if ONLY and fname not in ONLY:
+        continue
     sheets, summary = {}, []
     for code, prefix, sub in states:
         vdf = village_sheet(code, sub)
