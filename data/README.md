@@ -89,3 +89,11 @@ To refresh: download and extract `villages`, `subdistricts`, `districts`, `pinco
 `python scripts/build_villages_excel.py <extracted dir> <date, e.g. 02Oct2026> [workbook.xlsx ...]`.
 
 The all-India workbook is rebuilt from the per-state files with `python scripts/build_all_india_excel.py`.
+
+## Hierarchical IDs (Country → State → District → Mandal → Village)
+
+`Telangana_Hierarchy_IDs.xlsx` gives every level its own ID, numbered 1, 2, 3 … alphabetically
+inside its parent, plus a full code that is unique across India:
+`1-01-01-01-0001` = India (1) / Telangana (01) / Adilabad (01) / Adilabad Rural (01) / Ankapur (0001).
+Every row also holds its parent's full code, which links the levels. Sheets: Read Me, 1 Country, 2 States,
+3 Districts, 4 Mandals, 5 Villages, All Levels. Built with `python scripts/build_hierarchy_ids.py`.
