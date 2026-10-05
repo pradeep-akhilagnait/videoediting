@@ -4,6 +4,7 @@ State → District → Mandal (AP, Telangana) / Tehsil (Odisha, Rajasthan, Madhy
 
 | File | Sheets |
 |---|---|
+| **`All_India_Villages_Pincodes.xlsx`** | **Summary (per state + all-India total), All India Villages (677,673 rows), Sub-Districts, Urban PIN Codes (No Villages)** |
 | `AP_Telangana_Villages_Pincodes.xlsx` | Summary, AP Villages, AP Mandals, Telangana Villages, Telangana Mandals |
 | `Odisha_Villages_Pincodes.xlsx` | Summary, Odisha Villages, Odisha Tehsils |
 | `TamilNadu_Villages_Pincodes.xlsx` | Summary, Tamil Nadu Villages, Tamil Nadu Taluks |
@@ -86,3 +87,5 @@ A blank PIN means LGD has no PIN code for that village yet.
 To refresh: download and extract `villages`, `subdistricts`, `districts`, `pincode_villages` and `pincode_urban`
 `.csv.7z` files from that release, then run
 `python scripts/build_villages_excel.py <extracted dir> <date, e.g. 02Oct2026> [workbook.xlsx ...]`.
+
+The all-India workbook is rebuilt from the per-state files with `python scripts/build_all_india_excel.py`.
