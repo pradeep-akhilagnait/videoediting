@@ -52,6 +52,31 @@ for state_id, state, src, vsheet, ssheet, sub, prefix in STATES:
     write(pd.DataFrame({**base, "id": vv["id"], "village_name": vv["Village"], f"{sl}_id": vv[f"{sl}_id"],
                         "pincode": vv["Pincode"].fillna("")}), out / f"{prefix}_villages.csv")
 
+    # one sheet with every level and its id side by side
+    mi = m.set_index("id")
+    di = d.set_index("id")
+    dist_id = vv[f"{sl}_id"].map(mi["district_id"])
+    flat = pd.DataFrame({
+        "country_id": COUNTRY_ID, "country_name": COUNTRY,
+        "state_id": state_id, "state_name": state,
+        "district_id": dist_id, "district_name": dist_id.map(di["District"]),
+        f"{sl}_id": vv[f"{sl}_id"], f"{sl}_name": vv[f"{sl}_id"].map(mi[sub]),
+        "village_id": vv["id"], "village_name": vv["Village"],
+        "pincode": vv["Pincode"].fillna(""),
+    })
+    write(flat, out / f"{prefix}_all_levels.csv")
+    xl = flat.copy()
+    for c in [c for c in xl.columns if c.endswith("_id")] + ["pincode"]:
+        xl[c] = pd.to_numeric(xl[c], errors="coerce").astype("Int64")
+    with pd.ExcelWriter(out / f"{prefix}_all_levels.xlsx", engine="openpyxl") as xw:
+        xl.to_excel(xw, sheet_name=f"{state[:31]}", index=False)
+        ws = xw.sheets[f"{state[:31]}"]
+        ws.freeze_panes = "A2"
+        ws.auto_filter.ref = ws.dimensions
+        for col in ws.columns:
+            ws.column_dimensions[col[0].column_letter].width = max(12, min(40, max(len(str(c.value or "")) for c in col[:2000]) + 2))
+    assert (flat["district_name"] == vv["District"].values).all() and (flat[f"{sl}_name"] == vv[sub].values).all()
+
     # checks: every link points at an existing parent, and names line up with the source
     assert vv[f"{sl}_id"].notna().all() and m["district_id"].notna().all()
     chk = vv.merge(m[["id", sub, "district_id"]].rename(columns={"id": f"{sl}_id", sub: "_m"}), on=f"{sl}_id")
