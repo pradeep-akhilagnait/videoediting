@@ -110,6 +110,39 @@ for state_id, state, src, vsheet, ssheet, sub, prefix in STATES:
                             cell.fill = link_fill
                 ws.cell(row=1, column=idx).value = f"{c} (link)"
 
+    # single sheet: every level's id + name, each followed by the link to its parent
+    single = pd.DataFrame({
+        "country_id": COUNTRY_ID, "country_name": COUNTRY,
+        "state_id": state_id, "state_name": state, "state.country_id (link)": COUNTRY_ID,
+        "district_id": flat["district_id"], "district_name": flat["district_name"],
+        "district.state_id (link)": state_id,
+        f"{sl}_id": flat[f"{sl}_id"], f"{sl}_name": flat[f"{sl}_name"],
+        f"{sl}.district_id (link)": flat["district_id"],
+        "village_id": flat["village_id"], "village_name": flat["village_name"],
+        f"village.{sl}_id (link)": flat[f"{sl}_id"],
+        "pincode": flat["pincode"],
+    })
+    write(single, out / f"{prefix}_single_sheet.csv")
+    xs = single.copy()
+    for c in xs.columns:
+        if "_id" in c or c == "pincode":
+            xs[c] = pd.to_numeric(xs[c], errors="coerce").astype("Int64")
+    with pd.ExcelWriter(out / f"{prefix}_single_sheet.xlsx", engine="openpyxl") as xw:
+        xs.to_excel(xw, sheet_name=state[:31], index=False)
+        ws = xw.sheets[state[:31]]
+        ws.freeze_panes = "A2"
+        ws.auto_filter.ref = ws.dimensions
+        for i, c in enumerate(xs.columns, 1):
+            head = ws.cell(row=1, column=i)
+            head.font = Font(bold=True, color="FFFFFF")
+            head.fill = PatternFill("solid", fgColor="C55A11" if "(link)" in c else "1F4E78")
+            ws.column_dimensions[head.column_letter].width = max(12, min(36, len(c) + 2,
+                max(len(str(v)) for v in xs[c].head(2000).astype(str)) + 4))
+        for i, c in enumerate(xs.columns, 1):
+            if "(link)" in c:
+                for row in ws.iter_rows(min_row=2, min_col=i, max_col=i):
+                    row[0].fill = link_fill
+
     # checks: every link points at an existing parent, and names line up with the source
     assert vv[f"{sl}_id"].notna().all() and m["district_id"].notna().all()
     chk = vv.merge(m[["id", sub, "district_id"]].rename(columns={"id": f"{sl}_id", sub: "_m"}), on=f"{sl}_id")
