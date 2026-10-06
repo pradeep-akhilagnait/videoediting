@@ -88,6 +88,10 @@ for state_id, state, src, vsheet, ssheet, sub, prefix in STATES:
                                     f"{sl}_id": vv[f"{sl}_id"],
                                     "pincode": pd.to_numeric(vv["Pincode"], errors="coerce").astype("Int64")}),
     }
+    linked_csv = {"1 Country": "1_country", "2 State": "2_state", "3 Districts": "3_districts",
+                  f"4 {sub}s": f"4_{sl}s", "5 Villages": "5_villages"}
+    for name, df in linked.items():
+        write(df, out / f"{prefix}_linked_{linked_csv[name]}.csv")
     link_fill = PatternFill("solid", fgColor="FFF2CC")
     with pd.ExcelWriter(out / f"{prefix}_linked.xlsx", engine="openpyxl") as xw:
         for name, df in linked.items():
