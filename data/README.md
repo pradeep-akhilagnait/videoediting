@@ -105,4 +105,5 @@ Every row also holds its parent's full code, which links the levels. Sheets: Rea
 `<state>_districts.csv` → `<state>_mandals.csv` (`district_id`) → `<state>_villages.csv` (`mandal_id`, plus `pincode`).
 Ids run 1, 2, 3 … per level, alphabetical within each parent. Andhra Pradesh uses state_id 2.
 `<state>_all_levels.csv` / `.xlsx` puts every level in one sheet: country, state, district, mandal and village ids and names side by side, plus pincode.
+`<state>_linked.xlsx` has one sheet per level (Country, State, Districts, Mandals, Villages); each row carries its parent's id in a highlighted `(link)` column: state_id → district_id → mandal_id.
 Built with `python scripts/build_app_csv.py`.

@@ -10,6 +10,7 @@ import csv
 from pathlib import Path
 
 import pandas as pd
+from openpyxl.styles import Font, PatternFill
 
 DATA = Path(__file__).resolve().parent.parent / "data"
 COUNTRY_ID, COUNTRY = 1, "India"
@@ -76,6 +77,38 @@ for state_id, state, src, vsheet, ssheet, sub, prefix in STATES:
         for col in ws.columns:
             ws.column_dimensions[col[0].column_letter].width = max(12, min(40, max(len(str(c.value or "")) for c in col[:2000]) + 2))
     assert (flat["district_name"] == vv["District"].values).all() and (flat[f"{sl}_name"] == vv[sub].values).all()
+
+    # linked workbook: one sheet per level, each row holds its parent's id
+    linked = {
+        "1 Country": pd.DataFrame({"country_id": [COUNTRY_ID], "country_name": [COUNTRY]}),
+        "2 State": pd.DataFrame({"state_id": [state_id], "state_name": [state], "country_id": [COUNTRY_ID]}),
+        "3 Districts": pd.DataFrame({"district_id": d["id"], "district_name": d["District"], "state_id": state_id}),
+        f"4 {sub}s": pd.DataFrame({f"{sl}_id": m["id"], f"{sl}_name": m[sub], "district_id": m["district_id"]}),
+        "5 Villages": pd.DataFrame({"village_id": vv["id"], "village_name": vv["Village"],
+                                    f"{sl}_id": vv[f"{sl}_id"],
+                                    "pincode": pd.to_numeric(vv["Pincode"], errors="coerce").astype("Int64")}),
+    }
+    link_fill = PatternFill("solid", fgColor="FFF2CC")
+    with pd.ExcelWriter(out / f"{prefix}_linked.xlsx", engine="openpyxl") as xw:
+        for name, df in linked.items():
+            df.to_excel(xw, sheet_name=name, index=False)
+            ws = xw.sheets[name]
+            ws.freeze_panes = "A2"
+            ws.auto_filter.ref = ws.dimensions
+            for col in ws.columns:
+                head = col[0]
+                head.font = Font(bold=True, color="FFFFFF")
+                head.fill = PatternFill("solid", fgColor="1F4E78")
+                ws.column_dimensions[head.column_letter].width = max(14, min(40, max(len(str(c.value or "")) for c in col[:2000]) + 2))
+            # highlight the link (parent id) column: last id column after the name
+            parent_col = [c for c in df.columns if c.endswith("_id")][1:]
+            for c in parent_col:
+                idx = list(df.columns).index(c) + 1
+                for row in ws.iter_rows(min_row=1, min_col=idx, max_col=idx):
+                    for cell in row:
+                        if cell.row > 1:
+                            cell.fill = link_fill
+                ws.cell(row=1, column=idx).value = f"{c} (link)"
 
     # checks: every link points at an existing parent, and names line up with the source
     assert vv[f"{sl}_id"].notna().all() and m["district_id"].notna().all()
