@@ -92,6 +92,16 @@ for state_id, state, src, vsheet, ssheet, sub, prefix in STATES:
                   f"4 {sub}s": f"4_{sl}s", "5 Villages": "5_villages"}
     for name, df in linked.items():
         write(df, out / f"{prefix}_linked_{linked_csv[name]}.csv")
+    # the same five sheets in one CSV file: each sheet is a section (sheet name, header, rows)
+    with open(out / f"{prefix}_linked.csv", "w", newline="", encoding="utf-8") as fh:
+        w = csv.writer(fh, quoting=csv.QUOTE_ALL)
+        for i, (name, df) in enumerate(linked.items()):
+            if i:
+                w.writerow([])
+            w.writerow([f"Sheet: {name}"])
+            ids = [c for c in df.columns if c.endswith("_id")]
+            w.writerow([f"{c} (link)" if c in ids[1:] else c for c in df.columns])
+            w.writerows(df.astype("string").fillna("").itertuples(index=False))
     link_fill = PatternFill("solid", fgColor="FFF2CC")
     with pd.ExcelWriter(out / f"{prefix}_linked.xlsx", engine="openpyxl") as xw:
         for name, df in linked.items():
