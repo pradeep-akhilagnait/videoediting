@@ -110,3 +110,12 @@ The same five sheets are also saved as CSVs: `<state>_linked_1_country.csv` … 
 `<state>_linked.csv` is the same five sheets in one CSV file, each as a section ("Sheet: …" line, header, rows).
 `<state>_single_sheet.csv` / `.xlsx` has all fields in one sheet: each level's id and name followed by a highlighted `(link)` column holding its parent's id.
 Built with `python scripts/build_app_csv.py`.
+
+## All states except Andhra Pradesh, linked (`data/csv/all_states_except_ap_linked.xlsx`)
+
+Same layout as `ap_linked.xlsx` (tabs 1 Country, 2 States, 3 Districts, 4 Mandals, 5 Villages, with `(link)`
+parent-id columns) for the 35 other states/UTs. Ids continue after Andhra Pradesh: Telangana keeps the ids
+already issued (districts 29–61, mandals 689–1309, villages 17958–29407), then the other states follow in
+state_id order. `mandal_type` says what the state calls that level (Mandal, Tehsil, Taluk, Block …).
+state_id follows the app's list (AP = 2, Telangana = 32); merged Dadra & Nagar Haveli and Daman & Diu = 8,
+Ladakh = 37. Built with `python scripts/build_all_states_linked.py`.
