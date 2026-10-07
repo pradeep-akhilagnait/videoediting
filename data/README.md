@@ -103,7 +103,7 @@ Every row also holds its parent's full code, which links the levels. Sheets: Rea
 `data/csv/<state>/` holds one CSV per level in the app's layout
 (`"state_id","state_name","country_id","country_name","id","<name>","<parent>_id"`):
 `<state>_districts.csv` → `<state>_mandals.csv` (`district_id`) → `<state>_villages.csv` (`mandal_id`, plus `pincode`).
-Ids run 1, 2, 3 … per level, alphabetical within each parent. Andhra Pradesh uses state_id 2.
+Ids run 1, 2, 3 … per level, alphabetical within each parent. Andhra Pradesh uses state_id 2, Telangana state_id 32. Ids keep running across states (Telangana districts start at 29, mandals at 689, villages at 17958), so every id is unique in India. `<state>_linked_csv.zip` holds one CSV per Excel tab.
 `<state>_all_levels.csv` / `.xlsx` puts every level in one sheet: country, state, district, mandal and village ids and names side by side, plus pincode.
 `<state>_linked.xlsx` has one sheet per level (Country, State, Districts, Mandals, Villages); each row carries its parent's id in a highlighted `(link)` column: state_id → district_id → mandal_id.
 The same five sheets are also saved as CSVs: `<state>_linked_1_country.csv` … `<state>_linked_5_villages.csv`.
