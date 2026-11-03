@@ -43,7 +43,7 @@ model IndianState {
 /// seed; the app takes company_id from the session, never from the request.
 model Company {
   id             BigInt  @id @default(autoincrement()) @db.UnsignedBigInt
-  publicId       String  @unique(map: "uq_companies_public") @map("public_id") @db.Char(36)
+  publicId       String  @unique(map: "uq_companies_public") @default(uuid()) @map("public_id") @db.Char(36)
   name           String  @db.VarChar(150)
   tagline        String? @db.VarChar(200)
   addressLine    String? @map("address_line") @db.Text
@@ -117,7 +117,7 @@ model RolePermission {
 /// email is unique among live rows in the DB (email, is_live).
 model User {
   id           BigInt    @id @default(autoincrement()) @db.UnsignedBigInt
-  publicId     String    @unique(map: "uq_users_public") @map("public_id") @db.Char(36)
+  publicId     String    @unique(map: "uq_users_public") @default(uuid()) @map("public_id") @db.Char(36)
   companyId    BigInt    @map("company_id") @db.UnsignedBigInt
   name         String    @db.VarChar(120)
   email        String    @db.VarChar(150)

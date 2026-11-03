@@ -37,6 +37,21 @@ npx prisma generate
 npm run dev                  # starts the API on http://localhost:4000
 ```
 
+#### First-time setup (create the company + Owner login)
+
+There is no public sign-up (FR-1.1). After the database schema and seed are loaded
+(`upvc_launch_schema_mysql8.sql` then `upvc_launch_seed.sql`), bootstrap the business once:
+
+```bash
+cd server
+npm run setup                # prompts for company + owner details, creates the Owner login
+```
+
+It copies the seed's template roles (Owner / Manager / Sales / Staff) into your company and
+creates the first Owner user. You then sign in with that email. You can also pass the values
+as environment variables (`COMPANY_NAME`, `COMPANY_STATE_CODE`, `OWNER_NAME`, `OWNER_EMAIL`,
+`OWNER_PASSWORD`) to run it non-interactively.
+
 ### 2. Frontend
 
 ```bash
