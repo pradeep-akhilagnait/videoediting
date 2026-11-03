@@ -16,6 +16,7 @@
     "prisma:pull": "prisma db pull",
     "prisma:generate": "prisma generate",
     "prisma:studio": "prisma studio",
+    "db:check": "tsx scripts/db-check.ts",
     "setup": "tsx scripts/setup.ts"
   },
   "dependencies": {
