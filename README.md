@@ -47,24 +47,32 @@ npm run dev                  # starts the SPA on http://localhost:5173
 
 ## Working with the existing database
 
-The production schema already lives in MySQL (`varna_upvc_app`). Prisma is configured to
-**introspect** that database rather than own the schema:
+The production schema already lives in MySQL (created from `upvc_launch_schema_mysql8.sql`,
+45 tables). Prisma does **not** own or migrate this database. `prisma/schema.prisma` is
+written by hand to map onto the real tables, and grows model-by-model as features are built;
+tables not yet modelled are simply ignored and left untouched.
 
 ```bash
 cd server
-npx prisma db pull           # regenerates prisma/schema.prisma from the live DB
-npx prisma generate
+npx prisma generate          # regenerate the client after editing schema.prisma
 ```
 
-Until the live database is reachable, `prisma/schema.prisma` ships with a small
-**provisional** set of models (users, sessions, roles, permissions, audit log) so the API
-compiles and runs. Running `prisma db pull` replaces them with the real tables.
+To check the hand-written models against the live database (and see any drift), introspect a
+copy into a scratch file and diff it:
+
+```bash
+npx prisma db pull --print   # prints what Prisma sees in the live DB, without overwriting
+```
 
 ## Project conventions
 
+- **Multi-tenant.** `company_id` is taken from the session, never the request, and every
+  query is filtered by it (launch-schema rule 1).
 - **Server is the source of truth for all money math.** Values sent from the browser are
   recomputed on the server before anything is saved (see `REQUIREMENTS.md` §5).
 - **Default deny.** Every protected route declares the permission code it needs; missing a
-  permission is a 403.
+  permission is a 403. Codes live in the `permissions` table (seeded).
+- **Non-guessable IDs.** URLs/responses use each row's `public_id` (UUID), never the internal
+  auto-increment id.
 - **Soft delete** for business records; master data is deactivated, never deleted.
 - Money is stored and returned as decimal strings (never JS floats) to avoid rounding drift.

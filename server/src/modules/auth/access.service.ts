@@ -1,39 +1,42 @@
 import { prisma } from '../../lib/prisma.js';
 
+export type UserAccess = {
+  userId: bigint;
+  userPublicId: string;
+  companyId: bigint;
+  role: string;
+  permissions: Set<string>;
+};
+
 /**
- * Resolve a user's effective permission codes: the permissions granted to their
- * role, plus any per-user overrides (a grant with `granted = false` removes a
- * permission, `granted = true` adds one). Computed fresh on each request so a
- * Manager's permission change takes effect immediately (FR-1.6).
- *
- * Returns `null` if the user no longer exists or is deactivated.
+ * Load a user by their public id together with the permission codes their role
+ * grants. Computed fresh on each request so a Manager's permission change takes
+ * effect immediately (FR-1.6). Returns `null` if the user is missing, soft-
+ * deleted or deactivated.
  */
-export const getEffectivePermissions = async (
-  userId: string,
-): Promise<{ role: string; permissions: Set<string> } | null> => {
-  const user = await prisma.user.findUnique({
-    where: { id: userId },
+export const loadUserAccess = async (userPublicId: string): Promise<UserAccess | null> => {
+  const user = await prisma.user.findFirst({
+    where: { publicId: userPublicId, isActive: true, deletedAt: null },
     select: {
-      isActive: true,
+      id: true,
+      publicId: true,
+      companyId: true,
       role: {
         select: {
           name: true,
           permissions: { select: { permission: { select: { code: true } } } },
         },
       },
-      permissionGrants: {
-        select: { granted: true, permission: { select: { code: true } } },
-      },
     },
   });
 
-  if (!user || !user.isActive) return null;
+  if (!user) return null;
 
-  const permissions = new Set(user.role.permissions.map((rp) => rp.permission.code));
-  for (const grant of user.permissionGrants) {
-    if (grant.granted) permissions.add(grant.permission.code);
-    else permissions.delete(grant.permission.code);
-  }
-
-  return { role: user.role.name, permissions };
+  return {
+    userId: user.id,
+    userPublicId: user.publicId,
+    companyId: user.companyId,
+    role: user.role?.name ?? '',
+    permissions: new Set(user.role?.permissions.map((rp) => rp.permission.code) ?? []),
+  };
 };

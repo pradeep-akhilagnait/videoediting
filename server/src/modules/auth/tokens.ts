@@ -3,8 +3,8 @@ import { env } from '../../config/env.js';
 import { unauthorized } from '../../lib/errors.js';
 
 export type AccessTokenPayload = {
-  sub: string; // user id
-  role: string; // role name, for coarse UI checks; fine-grained perms are checked server-side
+  sub: string; // user public id (non-guessable)
+  role: string; // role name, for coarse UI hints; real checks are server-side
 };
 
 /** Sign a short-lived access token used as a Bearer token on API calls. */

@@ -15,11 +15,7 @@
     "lint": "eslint \"src/**/*.ts\"",
     "prisma:pull": "prisma db pull",
     "prisma:generate": "prisma generate",
-    "prisma:studio": "prisma studio",
-    "seed": "tsx prisma/seed.ts"
-  },
-  "prisma": {
-    "seed": "tsx prisma/seed.ts"
+    "prisma:studio": "prisma studio"
   },
   "dependencies": {
     "@prisma/client": "^5.22.0",

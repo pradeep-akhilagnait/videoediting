@@ -1,42 +1,48 @@
 import type { Request } from 'express';
+import { Prisma } from '@prisma/client';
 import { prisma } from './prisma.js';
 import { logger } from './logger.js';
 
 type AuditInput = {
-  userId?: string | null;
-  action: 'create' | 'update' | 'delete' | (string & {});
-  entityType: string;
-  entityId?: string | null;
+  companyId?: bigint | null;
+  tableName: string;
+  recordId?: bigint | null;
+  action: 'insert' | 'update' | 'delete' | 'restore';
+  changedBy?: bigint | null;
   before?: unknown;
   after?: unknown;
-  ip?: string | null;
 };
 
 /**
- * Record a create / update / delete in the audit log (FR-1.10). Auditing must
- * never break the operation it is recording, so failures are logged and
- * swallowed rather than thrown. Call it after the change has committed.
+ * Write one row to `audit_log` (FR-1.10, launch-schema rule 8). Auditing must
+ * never break the operation it records, so failures are logged and swallowed.
+ * Call it after the change has committed.
  */
 export const recordAudit = async (input: AuditInput): Promise<void> => {
   try {
     await prisma.auditLog.create({
       data: {
-        userId: input.userId ?? null,
+        companyId: input.companyId ?? null,
+        tableName: input.tableName,
+        recordId: input.recordId ?? null,
         action: input.action,
-        entityType: input.entityType,
-        entityId: input.entityId ?? null,
-        before: (input.before ?? undefined) as never,
-        after: (input.after ?? undefined) as never,
-        ip: input.ip ?? null,
+        changedBy: input.changedBy ?? null,
+        oldData: (input.before ?? Prisma.DbNull) as Prisma.InputJsonValue,
+        newData: (input.after ?? Prisma.DbNull) as Prisma.InputJsonValue,
       },
     });
   } catch (error) {
-    logger.error({ error, entityType: input.entityType }, 'Failed to write audit log');
+    logger.error({ error, tableName: input.tableName }, 'Failed to write audit log');
   }
 };
 
-/** Convenience wrapper that pulls the acting user and IP from the request. */
+/** Convenience wrapper that fills company and actor from the request. */
 export const auditFromRequest = (
   req: Request,
-  input: Omit<AuditInput, 'userId' | 'ip'>,
-): Promise<void> => recordAudit({ ...input, userId: req.auth?.userId ?? null, ip: req.ip });
+  input: Omit<AuditInput, 'companyId' | 'changedBy'>,
+): Promise<void> =>
+  recordAudit({
+    ...input,
+    companyId: req.auth?.companyId ?? null,
+    changedBy: req.auth?.userId ?? null,
+  });
