@@ -163,6 +163,33 @@ model UserSession {
   @@map("user_sessions")
 }
 
+/// A customer of the fabricator. Soft-deleted (deleted_at), never hard-deleted.
+model Customer {
+  id          BigInt    @id @default(autoincrement()) @db.UnsignedBigInt
+  publicId    String    @unique(map: "uq_customers_public") @default(uuid()) @map("public_id") @db.Char(36)
+  companyId   BigInt    @map("company_id") @db.UnsignedBigInt
+  name        String    @db.VarChar(120)
+  companyName String?   @map("company_name") @db.VarChar(150)
+  email       String?   @db.VarChar(150)
+  mobile      String?   @db.VarChar(15)
+  addressLine String?   @map("address_line") @db.Text
+  city        String?   @db.VarChar(100)
+  stateCode   String?   @map("state_code") @db.Char(2)
+  pincode     String?   @db.Char(6)
+  gstin       String?   @db.Char(15)
+  createdAt   DateTime  @default(now()) @map("created_at") @db.DateTime(3)
+  createdBy   BigInt?   @map("created_by") @db.UnsignedBigInt
+  updatedAt   DateTime  @default(now()) @updatedAt @map("updated_at") @db.DateTime(3)
+  updatedBy   BigInt?   @map("updated_by") @db.UnsignedBigInt
+  deletedAt   DateTime? @map("deleted_at") @db.DateTime(3)
+  deletedBy   BigInt?   @map("deleted_by") @db.UnsignedBigInt
+
+  @@unique([companyId, id], map: "uq_customers_tenant")
+  @@index([companyId, name], map: "ix_customers_name")
+  @@index([companyId, mobile], map: "ix_customers_mobile")
+  @@map("customers")
+}
+
 /// Append-only audit log (one row per insert/update/delete of business data).
 model AuditLog {
   id        BigInt   @id @default(autoincrement()) @db.UnsignedBigInt
