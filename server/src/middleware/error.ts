@@ -18,8 +18,7 @@ export const errorHandler = (
   err: unknown,
   _req: Request,
   res: Response,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- Express needs the 4-arg signature
-  _next: NextFunction,
+  _next: NextFunction, // Express needs the 4-arg signature to treat this as an error handler
 ) => {
   if (err instanceof AppError) {
     res.status(err.status).json({

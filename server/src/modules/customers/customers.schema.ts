@@ -1,9 +1,10 @@
 import { z } from 'zod';
 
 // Mirror the DB CHECK constraints so users get friendly errors, not DB errors.
+// Accept lower/upper case; it is uppercased before saving to satisfy the DB CHECK.
 const gstin = z
   .string()
-  .regex(/^[0-9]{2}[A-Z0-9]{13}$/, 'GSTIN must be 15 characters (e.g. 36ABCDE1234F1Z5)');
+  .regex(/^[0-9]{2}[A-Za-z0-9]{13}$/, 'GSTIN must be 15 characters (e.g. 36ABCDE1234F1Z5)');
 const mobile = z.string().regex(/^[0-9+ -]{10,15}$/, 'Enter a valid mobile number');
 const pincode = z.string().regex(/^[0-9]{6}$/, 'Pincode must be 6 digits');
 const stateCode = z.string().regex(/^[0-9]{2}$/, 'Invalid state code');

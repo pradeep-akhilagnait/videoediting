@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useQuery, useMutation, useQueryClient, keepPreviousData } from '@tanstack/react-query';
 import { useAuth } from '@/auth/use-auth';
-import { listProjects, createProject } from '@/lib/projects';
+import { listProjects, createProject, updateProject, getProject } from '@/lib/projects';
 import { ProjectFormDialog } from './ProjectFormDialog';
 
 const PAGE_SIZE = 10;
@@ -11,10 +11,12 @@ export const ProjectsPage = () => {
   const { can } = useAuth();
   const canManage = can('project.manage');
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
 
   const [search, setSearch] = useState('');
   const [page, setPage] = useState(1);
   const [creating, setCreating] = useState(false);
+  const [editingId, setEditingId] = useState<string | null>(null);
 
   const query = useQuery({
     queryKey: ['projects', { q: search, page }],
@@ -22,9 +24,22 @@ export const ProjectsPage = () => {
     placeholderData: keepPreviousData,
   });
 
-  const createMut = useMutation({
-    mutationFn: createProject,
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['projects'] }),
+  // Fetch the full project only when the user opens the edit dialog from a card.
+  const editQuery = useQuery({
+    queryKey: ['project', editingId],
+    queryFn: () => getProject(editingId!),
+    enabled: Boolean(editingId),
+  });
+
+  const invalidate = () => queryClient.invalidateQueries({ queryKey: ['projects'] });
+  const createMut = useMutation({ mutationFn: createProject, onSuccess: invalidate });
+  const updateMut = useMutation({
+    mutationFn: (vars: { id: string; body: Parameters<typeof updateProject>[1] }) =>
+      updateProject(vars.id, vars.body),
+    onSuccess: () => {
+      invalidate();
+      queryClient.invalidateQueries({ queryKey: ['project'] });
+    },
   });
 
   const data = query.data;
@@ -51,17 +66,38 @@ export const ProjectsPage = () => {
 
       <div className="card-grid">
         {data?.items.map((p) => (
-          <Link key={p.id} to={`/projects/${p.id}`} className="project-card">
-            <div className="project-card-head">
-              <strong>{p.name}</strong>
-              <span className={`status status-${p.status}`}>{p.status}</span>
+          <div key={p.id} className="project-card">
+            <button className="project-card-main" onClick={() => navigate(`/projects/${p.id}`)}>
+              <div className="project-card-head">
+                <strong>{p.name}</strong>
+                <span className={`status status-${p.status}`}>{p.status}</span>
+              </div>
+              <div className="project-field">
+                <span className="muted small">Customer</span>
+                <span>{p.customer.name}</span>
+              </div>
+              <div className="project-field">
+                <span className="muted small">Location</span>
+                <span>{p.siteCity ?? '—'}</span>
+              </div>
+            </button>
+            <div className="project-card-foot">
+              {canManage ? (
+                <button className="link" onClick={() => setEditingId(p.id)}>
+                  Edit project details
+                </button>
+              ) : (
+                <span />
+              )}
+              <button
+                className="open-arrow"
+                aria-label={`Open ${p.name}`}
+                onClick={() => navigate(`/projects/${p.id}`)}
+              >
+                →
+              </button>
             </div>
-            <div className="muted">{p.customer.name}</div>
-            {p.siteCity && <div className="muted small">{p.siteCity}</div>}
-            <div className="small muted">
-              {new Date(p.createdAt).toLocaleDateString('en-IN', { timeZone: 'Asia/Kolkata' })}
-            </div>
-          </Link>
+          </div>
         ))}
       </div>
 
@@ -91,6 +127,16 @@ export const ProjectsPage = () => {
         <ProjectFormDialog
           onClose={() => setCreating(false)}
           onSubmit={(input) => createMut.mutateAsync(input).then(() => undefined)}
+        />
+      )}
+      {editingId && editQuery.data && (
+        <ProjectFormDialog
+          initial={editQuery.data}
+          onClose={() => setEditingId(null)}
+          onSubmit={(input) => {
+            const { customerId: _omit, ...rest } = input;
+            return updateMut.mutateAsync({ id: editingId, body: rest }).then(() => undefined);
+          }}
         />
       )}
     </div>

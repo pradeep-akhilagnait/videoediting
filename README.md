@@ -79,6 +79,36 @@ copy into a scratch file and diff it:
 npx prisma db pull --print   # prints what Prisma sees in the live DB, without overwriting
 ```
 
+## Tests and checks
+
+From the repo root:
+
+```bash
+npm run lint         # eslint, server + client
+npm run typecheck    # tsc, server + client
+npm test             # vitest: unit + API integration tests (server)
+npm run check        # all of the above, then the client production build
+```
+
+Unit tests need nothing. The **integration tests** run against a **separate** MySQL
+database (never your real one — a safety guard refuses any DB whose name lacks "test"):
+
+1. Create it once and load the schema + seed:
+   ```sql
+   CREATE DATABASE varna_upvc_test CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+   ```
+   then run `upvc_launch_schema_mysql8.sql` and `upvc_launch_seed.sql` against it.
+2. Point the tests at it:
+   ```bash
+   # PowerShell:  $env:TEST_DATABASE_URL="mysql://varna_app:PASSWORD@localhost:3306/varna_upvc_test"
+   set TEST_DATABASE_URL=mysql://varna_app:PASSWORD@localhost:3306/varna_upvc_test
+   npm test
+   ```
+
+The integration tests reset the business tables and re-seed fixtures before each run, and
+cover: create/list/update/soft-delete, validation errors, Staff `403` on delete, cross-tenant
+`404`, soft-deleted rows excluded from lists, and an `audit_log` row per change.
+
 ## Project conventions
 
 - **Multi-tenant.** `company_id` is taken from the session, never the request, and every

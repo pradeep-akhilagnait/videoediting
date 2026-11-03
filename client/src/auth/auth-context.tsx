@@ -1,10 +1,11 @@
 import { createContext, useCallback, useEffect, useMemo, useState, type ReactNode } from 'react';
 import { api, setAccessToken, setUnauthorizedHandler } from '@/lib/api';
 
-export type AuthUser = { id: string; role: string };
+export type AuthUser = { publicId: string; role: string };
 
 export type AuthState = {
   user: AuthUser | null;
+  companyName: string | null;
   permissions: Set<string>;
   status: 'loading' | 'authenticated' | 'anonymous';
   login: (email: string, password: string) => Promise<void>;
@@ -14,17 +15,19 @@ export type AuthState = {
 
 export const AuthContext = createContext<AuthState | null>(null);
 
-type LoginResponse = { accessToken: string; user: AuthUser };
-type MeResponse = { user: AuthUser; permissions: string[] };
+type LoginResponse = { accessToken: string };
+type MeResponse = { user: AuthUser; company: { name: string }; permissions: string[] };
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<AuthUser | null>(null);
+  const [companyName, setCompanyName] = useState<string | null>(null);
   const [permissions, setPermissions] = useState<Set<string>>(new Set());
   const [status, setStatus] = useState<AuthState['status']>('loading');
 
   const clear = useCallback(() => {
     setAccessToken(null);
     setUser(null);
+    setCompanyName(null);
     setPermissions(new Set());
     setStatus('anonymous');
   }, []);
@@ -32,6 +35,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const loadMe = useCallback(async () => {
     const me = await api<MeResponse>('/auth/me');
     setUser(me.user);
+    setCompanyName(me.company.name);
     setPermissions(new Set(me.permissions));
     setStatus('authenticated');
   }, []);
@@ -68,8 +72,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const can = useCallback((permission: string) => permissions.has(permission), [permissions]);
 
   const value = useMemo<AuthState>(
-    () => ({ user, permissions, status, login, logout, can }),
-    [user, permissions, status, login, logout, can],
+    () => ({ user, companyName, permissions, status, login, logout, can }),
+    [user, companyName, permissions, status, login, logout, can],
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

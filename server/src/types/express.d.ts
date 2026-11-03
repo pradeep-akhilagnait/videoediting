@@ -11,6 +11,7 @@ declare global {
         userPublicId: string;
         /** Tenant. Every query must be filtered by this (never trust the request). */
         companyId: bigint;
+        companyName: string;
         role: string;
         permissions: Set<string>;
       };

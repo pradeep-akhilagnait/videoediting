@@ -26,6 +26,7 @@ export const authenticate = asyncHandler(
       userId: access.userId,
       userPublicId: access.userPublicId,
       companyId: access.companyId,
+      companyName: access.companyName,
       role: access.role,
       permissions: access.permissions,
     };

@@ -397,12 +397,9 @@ button.link.danger {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 1rem;
-  text-decoration: none;
-  color: inherit;
   display: flex;
   flex-direction: column;
-  gap: 0.35rem;
+  overflow: hidden;
   transition: box-shadow 0.15s, border-color 0.15s;
 }
 
@@ -411,11 +408,183 @@ button.link.danger {
   box-shadow: 0 2px 8px rgba(43, 108, 176, 0.12);
 }
 
+.project-card-main {
+  background: none;
+  border: none;
+  text-align: left;
+  width: 100%;
+  color: inherit;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  cursor: pointer;
+}
+
+.project-card-main:hover {
+  background: #f8fafc;
+}
+
 .project-card-head {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 0.5rem;
+}
+
+.project-card-head strong {
+  font-size: 1rem;
+}
+
+.project-field {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.3;
+}
+
+.project-card-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+  border-top: 1px solid var(--border);
+}
+
+.open-arrow {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #ebf2fb;
+  color: var(--primary);
+  border: none;
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+}
+
+.open-arrow:hover {
+  background: var(--primary);
+  color: #fff;
+}
+
+/* Sidebar layout */
+.layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.layout > .topbar {
+  border-radius: 0;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.company {
+  font-size: 1.05rem;
+}
+
+.role-chip {
+  font-size: 0.85rem;
+}
+
+.layout-body {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+}
+
+.sidebar {
+  width: 232px;
+  flex-shrink: 0;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 0.75rem;
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  position: sticky;
+  top: 72px;
+}
+
+.side-link {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.55rem 0.7rem;
+  border-radius: 8px;
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.side-link:hover {
+  background: #ebf2fb;
+  color: var(--primary);
+}
+
+.side-link.active {
+  background: #ebf2fb;
+  color: var(--primary);
+}
+
+.side-icon {
+  display: inline-flex;
+  flex-shrink: 0;
+}
+
+.content {
+  flex: 1;
+  min-width: 0;
+  padding: 1.5rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Coming soon */
+.coming-soon {
+  text-align: center;
+  padding: 3rem 1.5rem;
+}
+
+.coming-soon-badge {
+  display: inline-block;
+  background: #ebf2fb;
+  color: var(--primary);
+  padding: 0.25rem 0.8rem;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  margin-bottom: 0.75rem;
+}
+
+@media (max-width: 760px) {
+  .layout-body {
+    flex-direction: column;
+  }
+  .sidebar {
+    width: auto;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+  }
+  .sidebar-nav {
+    flex-direction: row;
+    overflow-x: auto;
+    position: static;
+  }
+  .side-link {
+    white-space: nowrap;
+  }
 }
 
 /* Status badges */

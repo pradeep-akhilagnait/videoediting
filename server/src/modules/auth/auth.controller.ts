@@ -50,6 +50,7 @@ export const me = async (req: Request, res: Response) => {
   if (!req.auth) throw unauthorized();
   res.json({
     user: { publicId: req.auth.userPublicId, role: req.auth.role },
+    company: { name: req.auth.companyName },
     permissions: [...req.auth.permissions],
   });
 };
