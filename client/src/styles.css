@@ -371,3 +371,153 @@ button.link.danger {
     grid-column: auto;
   }
 }
+
+.form-grid select,
+.inline-add input {
+  padding: 0.5rem 0.65rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  background: var(--surface);
+}
+
+.small {
+  font-size: 0.8rem;
+}
+
+/* Project card grid */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+.project-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem;
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  transition: box-shadow 0.15s, border-color 0.15s;
+}
+
+.project-card:hover {
+  border-color: var(--primary);
+  box-shadow: 0 2px 8px rgba(43, 108, 176, 0.12);
+}
+
+.project-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+/* Status badges */
+.status {
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  background: #e2e8f0;
+  color: #475569;
+  white-space: nowrap;
+}
+
+.status-active {
+  background: #dbeafe;
+  color: #1e40af;
+}
+.status-won {
+  background: #dcfce7;
+  color: #166534;
+}
+.status-lost {
+  background: var(--danger-bg);
+  color: var(--danger-text);
+}
+.status-completed {
+  background: #ede9fe;
+  color: #5b21b6;
+}
+.status-archived {
+  background: #e2e8f0;
+  color: #475569;
+}
+
+/* Tabs */
+.tabs {
+  display: flex;
+  gap: 0.25rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.tab {
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  border-radius: 0;
+  color: var(--muted);
+  font-weight: 500;
+  padding: 0.6rem 0.9rem;
+  width: auto;
+  cursor: pointer;
+}
+
+.tab:hover {
+  color: var(--text);
+}
+
+.tab.active {
+  color: var(--primary);
+  border-bottom-color: var(--primary);
+}
+
+.back-link {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.back-link:hover {
+  color: var(--primary);
+}
+
+.head-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.head-actions button {
+  width: auto;
+}
+
+button.ghost.danger {
+  color: var(--danger-text);
+}
+
+button.ghost.danger:hover:not(:disabled) {
+  background: var(--danger-bg);
+}
+
+.inline-add {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.inline-add input {
+  flex: 1;
+}
+
+.inline-add button {
+  width: auto;
+  white-space: nowrap;
+}

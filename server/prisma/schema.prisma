@@ -184,10 +184,64 @@ model Customer {
   deletedAt   DateTime? @map("deleted_at") @db.DateTime(3)
   deletedBy   BigInt?   @map("deleted_by") @db.UnsignedBigInt
 
+  projects Project[]
+
   @@unique([companyId, id], map: "uq_customers_tenant")
   @@index([companyId, name], map: "ix_customers_name")
   @@index([companyId, mobile], map: "ix_customers_mobile")
   @@map("customers")
+}
+
+/// A project (a job/site for a customer). Soft-deleted, tenant-scoped.
+model Project {
+  id              BigInt    @id @default(autoincrement()) @db.UnsignedBigInt
+  publicId        String    @unique(map: "uq_projects_public") @default(uuid()) @map("public_id") @db.Char(36)
+  companyId       BigInt    @map("company_id") @db.UnsignedBigInt
+  customerId      BigInt    @map("customer_id") @db.UnsignedBigInt
+  name            String    @db.VarChar(150)
+  siteAddress     String?   @map("site_address") @db.Text
+  siteCity        String?   @map("site_city") @db.VarChar(100)
+  siteStateCode   String?   @map("site_state_code") @db.Char(2)
+  shippingAddress String?   @map("shipping_address") @db.Text
+  status          String    @default("active") // active|won|lost|completed|archived
+  notes           String?   @db.Text
+  createdAt       DateTime  @default(now()) @map("created_at") @db.DateTime(3)
+  createdBy       BigInt?   @map("created_by") @db.UnsignedBigInt
+  updatedAt       DateTime  @default(now()) @updatedAt @map("updated_at") @db.DateTime(3)
+  updatedBy       BigInt?   @map("updated_by") @db.UnsignedBigInt
+  deletedAt       DateTime? @map("deleted_at") @db.DateTime(3)
+  deletedBy       BigInt?   @map("deleted_by") @db.UnsignedBigInt
+
+  customer Customer     @relation(fields: [customerId], references: [id])
+  boms     ProjectBom[]
+
+  @@unique([companyId, id], map: "uq_projects_tenant")
+  @@unique([companyId, id, customerId], map: "uq_projects_customer")
+  @@index([companyId, deletedAt, createdAt], map: "ix_projects_list")
+  @@map("projects")
+}
+
+/// A BOM within a project (a floor, a phase…). Holds designs.
+model ProjectBom {
+  id           BigInt    @id @default(autoincrement()) @db.UnsignedBigInt
+  publicId     String    @unique(map: "uq_boms_public") @default(uuid()) @map("public_id") @db.Char(36)
+  companyId    BigInt    @map("company_id") @db.UnsignedBigInt
+  projectId    BigInt    @map("project_id") @db.UnsignedBigInt
+  name         String    @db.VarChar(150)
+  sortOrder    Int       @default(0) @map("sort_order")
+  clonedFromId BigInt?   @map("cloned_from_id") @db.UnsignedBigInt
+  createdAt    DateTime  @default(now()) @map("created_at") @db.DateTime(3)
+  createdBy    BigInt?   @map("created_by") @db.UnsignedBigInt
+  updatedAt    DateTime  @default(now()) @updatedAt @map("updated_at") @db.DateTime(3)
+  updatedBy    BigInt?   @map("updated_by") @db.UnsignedBigInt
+  deletedAt    DateTime? @map("deleted_at") @db.DateTime(3)
+  deletedBy    BigInt?   @map("deleted_by") @db.UnsignedBigInt
+
+  project Project @relation(fields: [projectId], references: [id])
+
+  @@unique([companyId, id], map: "uq_boms_tenant")
+  @@index([projectId, deletedAt], map: "ix_boms_project")
+  @@map("project_boms")
 }
 
 /// Append-only audit log (one row per insert/update/delete of business data).

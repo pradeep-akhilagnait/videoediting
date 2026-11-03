@@ -5,6 +5,7 @@ type NavItem = { to: string; label: string; permission?: string };
 
 const NAV: NavItem[] = [
   { to: '/', label: 'Home' },
+  { to: '/projects', label: 'Projects', permission: 'project.view' },
   { to: '/customers', label: 'Customers', permission: 'customer.view' },
 ];
 

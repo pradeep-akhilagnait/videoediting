@@ -6,6 +6,8 @@ import { AppLayout } from '@/components/AppLayout';
 import { LoginPage } from '@/pages/LoginPage';
 import { DashboardPage } from '@/pages/DashboardPage';
 import { CustomersPage } from '@/pages/customers/CustomersPage';
+import { ProjectsPage } from '@/pages/projects/ProjectsPage';
+import { ProjectDetailPage } from '@/pages/projects/ProjectDetailPage';
 import { NotFoundPage } from '@/pages/NotFoundPage';
 
 const queryClient = new QueryClient({
@@ -22,6 +24,8 @@ export const App = () => (
             <Route element={<AppLayout />}>
               <Route path="/" element={<DashboardPage />} />
               <Route path="/customers" element={<CustomersPage />} />
+              <Route path="/projects" element={<ProjectsPage />} />
+              <Route path="/projects/:id" element={<ProjectDetailPage />} />
             </Route>
           </Route>
           <Route path="*" element={<NotFoundPage />} />
